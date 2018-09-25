@@ -1,0 +1,82 @@
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app: movieplex7
+  name: movieplex7
+spec: 
+  type: NodePort
+  ports:
+    - name: movieplex7
+      port: 8080
+      nodePort: 30088
+  selector: 
+    app: movieplex7
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: movieplex7
+  labels:
+    app: movieplex7
+spec:
+  selector:
+    matchLabels:
+      app: movieplex7
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: movieplex7
+    spec:
+      containers:
+      - name: movieplex7
+        image: <DTR HOSTNAME>/admin/movieplex7-tomee:latest
+        ports:
+        - containerPort: 8080
+          
+
+--- 
+apiVersion: v1
+kind: Service
+metadata: 
+  labels: 
+    app: react-client
+  name: react-client
+spec: 
+  type: NodePort
+  ports: 
+    - 
+      name: react-client
+      port: 80
+      nodePort: 30080
+  selector: 
+    app: react-client
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: react-client
+  labels:
+    app: react-client
+spec:
+  selector:
+    matchLabels:
+      app: react-client
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: react-client
+    spec:
+      containers:
+      - name: react-client
+        image: <DTR HOSTNAME>/admin/react-client:latest
+        env:
+        - name: API_HOST
+          value: <UCP HOSTNAME>:30088
+        ports:
+        - containerPort: 80
+          name: react-client
+    
