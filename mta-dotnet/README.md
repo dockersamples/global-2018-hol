@@ -17,10 +17,7 @@ The app you'll be using is the same one from the video series [Modernizing .NET 
 
 ## <a name="0"></a>Step 0: The Play with Docker Lab Environment
 
-Start a Docker Enterprise Edition session at the URL provided by your workshop organizer. This is a hybrid cluster, with Linux and Windows nodes. This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
-
-
-# TODO: Add Link to Environment
+Start a Docker Enterprise Edition session at the URL provided by your workshop organizer. This is a hybrid cluster, with Linux and Windows nodes. This workshop is only available to people attending an in-person workshop.
 
 The left-hand navigation lists all the nodes you can connect to. Select the Windows node - the name will start with `win0000` - and the terminal window in the right-hand pane connects to a PowerShell session on the Windows node:
 
@@ -59,23 +56,12 @@ cd mta-netfx-dev
 git checkout part-1
 ```
 
-Version 1 uses containers for a SQL Server database and the ASP.NET app. You can build the Docker images for both containers using Docker Compose. First install Compose using Chocolatey:
-
-```
-choco install -y docker-compose
-```
-
-Then change to the application directory and build the images:
+Version 1 uses containers for a SQL Server database and the ASP.NET app. You can build the Docker images for both containers using Docker Compose. First change to the application directory and build the images:
 
 ```.term1
 cd app 
 
 docker-compose -f .\docker-compose.yml -f .\docker-compose-build.yml build
-```
-If you get an error that compose isn't installed, type
-
-```
-choco install docker-compose
 ```
 
 > Compose merges the two input files. The first specifies the structure of the app and the second adds the build details. They're kept separate because they have different concerns, and this keeps them clean.
@@ -305,7 +291,7 @@ If the product team don't like the new UI, they can easily replace it by buildin
 
 > The app has a modern architecture now, powered by Docker and without needing a full rewrite. You've extracted key features from the app and run them in separate container, using Docker to plug everything together, and to give you a consistent build and deployment process for the whole solution.
 
-So far you've been running the application using Docker on the Windows node. Next youy'll learn how to push the images to a private registry and run the app in cluster with Docker swarm mode.
+So far you've been running the application using Docker on the Windows node. Next you'll learn how to push the images to a private registry and run the app in cluster with Docker swarm mode.
 
 ## <a name="4"></a>Step 4: Push Images to Docker Trusted Registry
 
