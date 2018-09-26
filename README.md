@@ -1,6 +1,8 @@
 # 2018 Docker Global Event Series: Hands-On Labs
 
+Welcome to your local edition of this season's Docker global event series! From October - December 2018 Docker user groups all over the world will be gathering to work through these hands-on labs and #LearnDocker. 
 
+The main theme is modernizing traditional .NET / Windows applications! But as you'll see below we also have a number of other labs available on a variety of topics and for different skill levels, including for beginners. Partner with your neighbor, work in a small group, let your Community Leader know if you need a hand and tweet at @Docker using #LearnDocker to share some pics!
 
 ## Understanding the Play With Docker Interface
 
