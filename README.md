@@ -1,17 +1,12 @@
-# 2018 Fall Events - Docker Hands On Labs
+# 2018 Docker Global Event Series: Hands-On Labs
 
-Hands on Labs for Docker events in 2018.
 
-Open one of these links in a new browser window to use Docker Enterprise Edition with these labs.
-
-- [Hybrid Windows-Linux environment](TODO)
-- [Linux Only environment](TODO)
 
 ## Understanding the Play With Docker Interface
 
 ![](./images/pwd_screen.png)
 
-This workshop is only available to people doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/). The environment will be based on [Play with Docker](https://labs.play-with-docker.com/).
+This workshop is only available to people doing a Hands-on Lab at one of Docker's in-person events. The environment will be based on [Play with Docker](https://labs.play-with-docker.com/).
 
 If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
 
