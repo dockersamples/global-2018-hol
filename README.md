@@ -2,7 +2,7 @@
 
 Welcome to your local edition of this season's Docker global event series! From October - December 2018 Docker user groups all over the world will be gathering to work through these hands-on labs and #LearnDocker. 
 
-The main theme is modernizing traditional .NET / Windows applications! But as you'll see below we also have a number of other labs available on a variety of topics and for different skill levels, including for beginners. Partner with your neighbor, work in a small group, let your Community Leader know if you need a hand and tweet at @Docker using #LearnDocker to share some pics!
+The main theme is [modernizing traditional .NET / Windows applications](/mta-dotnet/)! But as you'll see below we also have a number of other labs available on a variety of topics and for different skill levels, including for beginners. Partner with your neighbor, work in a small group, let your Community Leader know if you need a hand and tweet at @Docker using #LearnDocker to share some pics!
 
 ## Understanding the Play With Docker Interface
 
@@ -46,6 +46,8 @@ Throughout the lab you will be asked to provide either hostnames or login creden
 - When you see the Windows flag all the subsequent instructions should be completed in your Windows console. You can skip these sections if you have a Linux only environment.
 
     ![](./images/windows75.png)
+    
+## The Labs
     
 ### [Modernizing Traditional .NET Applications](/mta-dotnet/)
 Moving an application to Docker doesn't mean you have to re-write your whole application. In this lab, you'll containerize an older, monolithic .NET application without changing any code. And you'll see the benefit of running it on Docker. Then in a few simple steps you'll build additional services in separate containers, breaking features out of the monolith into separate containers, without rewriting the app. 
