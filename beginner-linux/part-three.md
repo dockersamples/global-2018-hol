@@ -7,24 +7,24 @@ When you open it, it'll look something like this
 
 You won't use much of it, just the command line in `worker1` and `worker2`. The full environment will be used in [the other labs](../README.md).
 
-So far we have explored using single instances of containers running on a single host, much like a developer might do when working on a single service application or like an IT adminstrator might do on a test rig. Production applications are usually much more complex and this single server model will not work to coordinate 10s or 100s of containers and the network connections amongst them, not to mention the need to ensure availability and the ability to scale.
+So far we have explored using single instances of containers running on a single host, much like a developer might do when working on a single service application or as an IT administrator might do on a test rig. Production applications are usually much more complex and this single server model will not work to coordinate 10s or 100s of containers and the network connections amongst them, not to mention the need to ensure availability and the ability to scale.
 
-For real applications IT users and app teams need more sophisticated tools. Docker supplies two such tools: ***Docker Compose*** and ***Docker Swarm Mode***. The two tools have some similarities but some important differences:
+For real applications, IT users and app teams need more sophisticated tools. Docker supplies two such tools: ***Docker Compose*** and ***Docker Swarm Mode***. The two tools have some similarities but some important differences:
 
 - **Compose** is used to control multiple containers on a single system. Much like the *Dockerfile* we looked at to build an image, there is a text file that describes the application: which images to use, how many instances, the network connections, etc. But *Compose* only runs on a single system so while it is useful, we are going to skip *Compose*<sup id="a1">[1](#fn-compose)</sup> and go straight to *Docker Swarm Mode*.
 - **Swarm Mode** tells Docker that you will be running many Docker engines and you want to coordinate operations across all of them. Swarm mode combines the ability to not only define the application architecture, like Compose, but to define and maintain high availability levels, scaling, load balancing, and more. With all this functionality, *Swarm mode* is used more often in production environments than it's more simplistic cousin, Compose.
 
 ## The application
 
-The voting app is a multi-container application often used for demo purposes during Docker meetups and conferences. It basically allow users to vote between two choices, the default being "cat" and "dog", but could be "space" or "tab", too, if you feel like it. This application is available on Github and updated very frequently when new features are developed.
+The voting app is a multi-container application often used for demo purposes during Docker meetups and conferences. It basically allows users to vote between two choices, the default being "cat" and "dog", but could be "space" or "tab", too, if you feel like it. This application is available on Github and updated very frequently when new features are developed.
 
 ## Initialize Your Swarm
 
-In most cases, first thing we would need to do is tell our Docker hosts we want to use Docker Swarm Mode. Because we're using the *Play with Docker* environment, the Swarm is already configured. So this is mostly for your information.
+In most cases, the first thing we would need to do is tell our Docker hosts we want to use Docker Swarm Mode. Because we're using the *Play with Docker* environment, the Swarm is already configured. So this is mostly for your information.
 
-Swarms *can* be just a single node, but that is unusual as you would have no high availability capabilities and you would severely limit your scalability. Most production swarms have at least three *manager* nodes in them and many *worker* nodes. Three managers is the minimum to have a true high-availability cluster with quorum. Note that manager nodes can run your container tasks the same as a worker node, but this functionality can also be separated so that managers only perform the management tasks. Of course in this test environment there is only one manager node.
+Swarms *can* be just a single node, but that is unusual as you would have no high availability capabilities and you would severely limit your scalability. Most production swarms have at least three *manager* nodes in them and many *worker* nodes. Three managers are the minimum to have a true high-availability cluster with a quorum. Note that manager nodes can run your container tasks the same as a worker node, but this functionality can also be separated so that managers only perform the management tasks. Of course in this test environment, there is only one manager node.
 
-Initializing Docker Swarm Mode is easy. At the terminal you would just type. (No need to do this now, it's already done)
+Initializing Docker Swarm Mode is easy. At the terminal, you would just type. (No need to do this now, it's already done)
 
 ```
 docker swarm init
@@ -80,11 +80,11 @@ cat docker-stack.yml
 
 This YAML file defines our entire stack: the architecture of the services, number of instances, how everything is wired together, how to handle updates to each service. It is the source code for our application design. A few items of particular note:
 
-- Near the top of the file you will see the line "services:". These are the individual application components. In the voting app we have redis, db, vote, result, worker, and visualizer as our services.
-- Beneath each service are lines that specify how that service should run:
+- Near the top of the file, you will see the line "services:". These are the individual application components. In the voting app, we have redis, DB, vote, result, worker, and visualizer as our services.
+- Beneath each service is lines that specify how that service should run:
   - Notice the familiar term *image* from earlier labs? Same idea here: this is the container image to use for a particular service.
   - *Ports* and *networks* are mostly self-explanatory although it is worth pointing out that these networks and ports can be privately used within the stack or they can allow external communication to and from a stack.<sup id="a2">[2](#fn-network)</sup>
-  - Note that some services have a line labeled *replicas*: this indicates the number of instances, or tasks, of this service that the Swarm managers should start when the stack is brought up. The Docker engine is intelligent enough to automatically load balance between multiple replicas using built-in load balancers. (The built-in load balancer can, of course, be swapped out for something else.)
+  - Note that some services have a line labelled *replicas*: this indicates the number of instances, or tasks, of this service that the Swarm managers should start when the stack is brought up. The Docker engine is intelligent enough to automatically load balance between multiple replicas using built-in load balancers. (The built-in load balancer can, of course, be swapped out for something else.)
 
 Ensure you are in the `manager1` manager terminal and do the following:
 
@@ -111,7 +111,7 @@ We can get details on each service within the stack with the following:
 docker stack services voting_stack
 ```
 
-The output should be similar to the following, although naturally your IDs will be unique:
+The output should be similar to the following, although naturally, your IDs will be unique:
 
 ```
 ID            NAME                     MODE        REPLICAS  IMAGE
@@ -129,7 +129,7 @@ s/examplevotingapp_worker:latest
 
 If you see that there are 0 replicas just wait a few seconds and enter the command again. The Swarm will eventually get all the replicas running for you. Just like our `docker-stack` file specified, there are two replicas of the *voting_stack_vote* service and one of each of the others.
 
-Let's list the tasks of the vote service.
+Let's list the tasks of the voting service.
 
 ```
 docker service ps voting_stack_vote
@@ -146,31 +146,31 @@ fore  node1  Running        Running 56 seconds ago
 fore  node2  Running        Running 58 seconds ago
 ```
 
-From the NODE column, we can see one task is running on each node. This app happens to have a built-in [SWARM VISUALIZER](/){:data-term=""}{:data-port="8080"} to show you how the app is setup and running. You can also access the [front-end web UI](/){:data-term=""}{:data-port="5000"} of the app to cast your vote for dogs or cats, and track how the votes are going on the [result](/){:data-term=""}{:data-port="5001"} page. Try opening the front-end several times so you can cast multiple votes. You should see that the "container ID" listed at the bottom of the voting page changes since we have two replicas running.
+From the NODE column, we can see one task is running on each node. This app happens to have a built-in [SWARM VISUALIZER](/){:data-term=""}{:data-port="8080"} to show you how the app is set up and running. You can also access the [front-end web UI](/){:data-term=""}{:data-port="5000"} of the app to cast your vote for dogs or cats, and track how the votes are going on the [result](/){:data-term=""}{:data-port="5001"} page. Try opening the front-end several times so you can cast multiple votes. You should see that the "container ID" listed at the bottom of the voting page changes since we have two replicas running.
 
 The [SWARM VISUALIZER](/){:data-term=""}{:data-port="8080"} gives you the physical layout of the stack, but here is a logical interpretation of how stacks, services and tasks are inter-related:
 ![Stack, services and tasks](/images/ops-swarm-stack-service-task.svg)
 
 ## Scaling An Application
-Let us pretend that our cats vs. dogs vote has gone viral and our two front-end web servers are no longer able to handle the load. How can we tell our app to add more replicas of our *vote* service? In production you might automate it through Docker's APIs but for now we will do it manually. You could also edit the `docker-stack.yml` file and change the specs if you wanted to make the scale size more permanent. Type the following at the [node1] terminal:
+Let us pretend that our cats vs. dogs vote has gone viral and our two front-end web servers are no longer able to handle the load. How can we tell our app to add more replicas of our *vote* service? In production, you might automate it through Docker's APIs but for now, we will do it manually. You could also edit the `docker-stack.yml` file and change the specs if you wanted to make the scale size more permanent. Type the following at the [node1] terminal:
 
 ```
 docker service scale voting_stack_vote=5
 ```
 
-Now enter your `docker stack services voting_stack` command again. You should see the number of replicas for the vote service increase to 5 and in a few seconds Swarm will have all of them running. Go back to your [front-end voting UI](/){:data-term=""}{:data-port="5000"} and refresh the page a few times. You should see the *container ID* listed at the bottom cycle through all 5 of your containers. If you go back and refresh your [SWARM VISUALIZER](/){:data-term=""}{:data-port="8080"} you should see your updated architecture there as well.
+Now enter your `docker stack services voting_stack` command again. You should see the number of replicas for the vote service increase to 5 and in a few seconds, Swarm will have all of them running. Go back to your [front-end voting UI](/){:data-term=""}{:data-port="5000"} and refresh the page a few times. You should see the *container ID* listed at the bottom cycle through all 5 of your containers. If you go back and refresh your [SWARM VISUALIZER](/){:data-term=""}{:data-port="8080"} you should see your updated architecture there as well.
 
 Here's our new architecture after scaling:
 ![Swarm scaling](/images/ops-swarm-scale.svg)
 
-That's all there is to it! Docker Swarm can easily and quickly scale your application's services up and down as needs require. Again, in many situations you would probably want to automate this rather than manually scaling, which is pretty easy through the Docker APIs. You also have the option to swap out the built-in load balancer for something with additional controls, like an [F5](https://store.docker.com/images/f5networks-asp) or [Citrix NetScaler](https://store.docker.com/images/netscaler-cpx-express) or some other software you prefer.
+That's all there is to it! Docker Swarm can easily and quickly scale your application's services up and down as needs require. Again, in many situations, you would probably want to automate this rather than manually scaling, which is pretty easy through the Docker APIs. You also have the option to swap out the built-in load balancer for something with additional controls, like an [F5](https://store.docker.com/images/f5networks-asp) or [Citrix NetScaler](https://store.docker.com/images/netscaler-cpx-express) or some other software you prefer.
 
 ## Conclusion
 
-Using only a couple of commands enables you to deploy a stack of services using Docker Swarm Mode to orchestrate the entire stack, all maintained in the simple, human readable Docker Compose file format.
+Using only a couple of commands enables you to deploy a stack of services using Docker Swarm Mode to orchestrate the entire stack, all maintained in the simple, human-readable Docker Compose file format.
 
 ## What next?
-Hopefully these first few labs have given you some familiarity with Docker, containers, and Docker Swarm Mode orchestration. We encourage you to keep Playing With Docker to learn more. There are several things you can do to continue your learning:
+Hopefully, these first few labs have given you some familiarity with Docker, containers, and Docker Swarm Mode orchestration. We encourage you to keep Playing With Docker to learn more. There are several things you can do to continue your learning:
 
 1. Keep learning right here in the Play With Docker classroom with [Phase 2](https://training.play-with-docker.com/ops-stage2/) and [Phase 3](https://training.play-with-docker.com/ops-stage3/) of the Docker for IT Pros and System Administrators learning path. 
   * In Phase 2 you will learn more about orchestration, security, and networking
