@@ -1,6 +1,6 @@
 # Docker for Beginners - Linux Part One
 
-In this lab you will explore the basics of how the Docker Engine executes and isolates containers from each other. If you already have experience running containers and basic Docker commands you can probably skip this intro exercise.
+In this lab, you will explore the basics of how the Docker Engine executes and isolates containers from each other. If you already have experience running containers and basic Docker commands you can probably skip this intro exercise.
 
 In order to run the lab, we have provided a Docker Enterprise Edition *Play with Docker* environment for you to use. This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
 
@@ -24,23 +24,23 @@ Tips:
 
 Code snippets are shown in one of three ways throughout this environment:
 
-1. Code that looks like `this` is sample code snippets that is usually part of an explanation.
-2. Code that appears in box like the one below can be clicked on and it will automatically be typed in to the appropriate terminal window:
+1. Code that looks like `this` is sample code snippets that are usually part of an explanation.
+2. Code that appears in a box like the one below can be clicked on and it will automatically be typed into the appropriate terminal window:
 ```.term1
 uname -a
 ```
-3. Code appearing in windows like the one below is code that you should type in yourself. Usually there will be a unique ID or other bit your need to enter which we cannot supply. Items appearing in <> are the pieces you should substitute based on the instructions.
+3. Code appearing in windows like the one below is code that you should type in yourself. Usually, there will be a unique ID or another bit you need to enter which we cannot supply. Items appearing in <> are the pieces you should substitute based on the instructions.
 ```
 docker container start <container ID>
 ```
 
 ## 1.0 Running your first container
-It's time to get your hands dirty! As with all things technical, a "hello world" app is good place to start. Type or click the code below to run your first Docker container:
+It's time to get your hands dirty! As with all things technical, a "hello world" app is a good place to start. Type or click the code below to run your first Docker container:
 ```.term1
 docker container run hello-world
 ```
 
-That's it: your first container. The *hello-world* container output tells you a bit about what just happened. Essentially, the Docker engine running in your terminal tried to find an **image** named hello-world. Since you just got started there are no images stored locally (`Unable to find image...`) so Docker engine goes to its default **Docker registry**, which is [Docker Store](https://store.docker.com), to look for an image named "hello-world". It finds the image there, pulls it down, and then runs it in a container. And hello-world's only function is to output the text you see in your terminal, after which the container exits.
+That's it: your first container. The *hello-world* container output tells you a bit about what just happened. Essentially, the Docker engine running in your terminal tried to find a **image** named hello-world. Since you just got started there are no images stored locally (`Unable to find the image...`) so Docker engine goes to its default **Docker registry**, which is [Docker Store](https://store.docker.com), to look for an image named "hello-world". It finds the image there, pulls it down, and then runs it in a container. And hello-world's only function is to output the text you see in your terminal, after which the container exists.
 
 ![Hello world explainer](../images/ops-basics-hello-world.svg)
 
@@ -137,7 +137,7 @@ ff0a5c3750b9        alpine             "ls -l"                   8 minutes ago  
 c317d0a9e3d2        hello-world         "/hello"                 34 seconds ago      Exited (0) 12 minutes ago                       stupefied_mcclintock
 ```
 
-What you see now is a list of all containers that you ran. Notice that the `STATUS` column shows that these containers exited some time ago. 
+What you see now is a list of all the containers that you ran. Notice that the `STATUS` column shows that these containers exited some time ago. 
 
 Here is the same output of the `docker container ls -a` command, shown diagrammatically (note that your container IDs and names will be different):
 
@@ -148,7 +148,7 @@ It makes sense to spend some time getting comfortable with the `docker run` comm
 ### 1.2 Container Isolation
 In the steps above we ran several commands via container instances with the help of `docker container run`. The `docker container ls -a` command showed us that there were several containers listed. Why are there so many containers listed if they are all from the *alpine* image?
 
-This is a critical security concept in the world of Docker containers! Even though each `docker container run` command used the same alpine ***image***, each execution was a separate, isolated ***container***. Each container has a separate filesystem and runs in a different namespace; by default a container has no way of interacting with other containers, even those from the same image. Let's try another exercise to learn more about isolation.
+This is a critical security concept in the world of Docker containers! Even though each `docker container run` command used the same alpine ***image***, each execution was a separate, isolated ***container***. Each container has a separate filesystem and runs in a different namespace; by default, a container has no way of interacting with other containers, even those from the same image. Let's try another exercise to learn more about isolation.
 
 ```.term1
 docker container run -it alpine /bin/ash
@@ -169,9 +169,9 @@ To show how isolation works, run the following:
 docker container run alpine ls
 ```
 
-It is the same `ls` command we used inside the container's interactive ash shell, but this time, did you notice that your "hello.txt" file is missing? That's isolation! Your command ran in a new and separate *instance*, even though it is based on the same *image*. The 2nd instance has no way of interacting with the 1st instance because the Docker Engine keeps them separated and we have not setup any extra parameters that would enable these two instances to interact.
+It is the same `ls` command we used inside the container's interactive ash shell, but this time, did you notice that your "hello.txt" file is missing? That's isolation! Your command ran in a new and separate *instance*, even though it is based on the same *image*. The 2nd instance has no way of interacting with the 1st instance because the Docker Engine keeps them separated and we have not set up any extra parameters that would enable these two instances to interact.
 
-In every day work, Docker users take advantage of this feature not only for security, but to test the effects of making application changes. Isolation allows users to quickly create separate, isolated test copies of an application or service and have them run side-by-side without interfering with one another. In fact, there is a whole lifecycle where users take their changes and move them up to production using this basic concept and the built-in capabilities of Docker Enteprise. We will explore more of that in later exercises.
+In everyday work, Docker users take advantage of this feature not only for security but to test the effects of making application changes. Isolation allows users to quickly create separate, isolated test copies of an application or service and have them run side-by-side without interfering with one another. In fact, there is a whole lifecycle where users take their changes and move them up to production using this basic concept and the built-in capabilities of Docker Enterprise. We will explore more of that in later exercises.
 
 Right now, the obvious question is "how do I get back to the container that has my 'hello.txt' file?"
 
@@ -200,7 +200,7 @@ The container in which we created the "hello.txt" file is the same one where we 
 docker container start <container ID>
 ```
 
-- **Pro tip:** Instead of using the full container ID you can use just the first few characters, as long as they are enough to uniquely ID a container. So we could simply use "3030" to identify the container instance in the example above, since no other containers in this list start with these characters.
+- **Pro tip:** Instead of using the full container ID you can use just the first few characters, as long as they are enough to uniquely ID a container. So we could simply use "3030" to identify the container instance in the example above since no other containers in this list start with these characters.
 
 Now use the `docker container ls` command again to list the running containers. 
 
@@ -209,7 +209,7 @@ CONTAINER ID        IMAGE               COMMAND                  CREATED        
 3030c9c91e12        alpine              "/bin/ash"                2 minutes ago       Up 14 seconds                        distracted_bhaskara
 ```
 
-Notice this time that our container instance is still running. We used the ash shell this time so the rather than simply exiting the way /bin/sh did earlier, ash waits for a command. We can send a command in to the container to run by using the `exec` command, as follows:
+Notice this time that our container instance is still running. We used the ash shell this time so the rather than simply exiting the way /bin/sh did earlier, ash waits for a command. We can send a command into the container to run by using the `exec` command, as follows:
 
 ```
 docker container exec <container ID> ls
@@ -219,14 +219,14 @@ This time we get a directory listing and it shows our "hello.txt" file because w
 
 ![Docker container exec command](../images/ops-basics-exec.svg)
 
-Now you are starting to see some of the important concepts of containers. In the next exercise we will start to see how you can create your own Docker images and how to use a Dockerfile to standardize images such that you can create larger, more complex images in a simple, automated manner.
+Now you are starting to see some of the important concepts of containers. In the next exercise, we will start to see how you can create your own Docker images and how to use a Dockerfile to standardize images such that you can create larger, more complex images in a simple, automated manner.
 
 
 ### 1.3 Terminology
 In the last section, you saw a lot of Docker-specific jargon which might be confusing to some. So before you go further, let's clarify some terminology that is used frequently in the Docker ecosystem.
 
-- *Images* - The file system and configuration of our application which are used to create containers. To find out more about a Docker image, run `docker image inspect alpine`. In the demo above, you used the `docker image pull` command to download the **alpine** image. When you executed the command `docker container run hello-world`, it also did a `docker image pull` behind the scenes to download the **hello-world** image.
-- *Containers* - Running instances of Docker images &mdash; containers run the actual applications. A container includes an application and all of its dependencies. It shares the kernel with other containers, and runs as an isolated process in user space on the host OS. You created a container using `docker run` which you did using the alpine image that you downloaded. A list of running containers can be seen using the `docker container ls` command.
-- *Docker daemon* - The background service running on the host that manages building, running and distributing Docker containers.
+- *Images* - The file system and configuration of our application which is used to create containers. To find out more about a Docker image, run `docker image inspect alpine`. In the demo above, you used the `docker image pull` command to download the **alpine** image. When you executed the command `docker container run hello-world`, it also did a `docker image pull` behind the scenes to download the **hello-world** image.
+- *Containers* - Running instances of Docker images &mdash; containers run the actual applications. A container includes an application and all of its dependencies. It shares the kernel with other containers and runs as an isolated process in user space on the host OS. You created a container using `docker run` which you did use the alpine image that you downloaded. A list of running containers can be seen using the `docker container ls` command.
+- *Docker daemon* - The background service running on the host that manages the building, running and distributing Docker containers.
 - *Docker client* - The command line tool that allows the user to interact with the Docker daemon.
 - *Docker Store* - Store is, among other things, a [registry](https://store.docker.com/) of Docker images. You can think of the registry as a directory of all available Docker images.
