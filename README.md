@@ -10,7 +10,7 @@ The main theme is [modernizing traditional .NET / Windows applications](/mta-dot
 
 This workshop is only available to people doing a Hands-on Lab at one of Docker's in-person events. The environment will be based on [Play with Docker](https://labs.play-with-docker.com/).
 
-If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
+If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
 
 There are three main components to the Play With Docker (PWD) interface. 
 
