@@ -1,6 +1,6 @@
 # Docker 101 Windows Containers
 
-In this lab we'll help you get familiar with running Docker on Windows. We'll look at different ways to run Windows containers, and we'll build a couple of simple applications and deploy them.
+In this lab, we'll help you get familiar with running Docker on Windows. We'll look at different ways to run Windows containers, and we'll build a couple of simple applications and deploy them.
 
 ## Table of Contents
 
@@ -30,7 +30,7 @@ docker container rm --force `
   $(docker container ls --quiet --all)
 ```
 
-> In this lab you'll work with the Windows node directly. Once you have a good understanding of Windows containers, you can do the [Modernizing Traditional .NET/Windows Applications](TODO) lab, which deploys a distibuted .NET application across the swarm.
+> In this lab you'll work with the Windows node directly. Once you have a good understanding of Windows containers, you can do the [Modernizing Traditional .NET/Windows Applications](TODO) lab, which deploys a distributed .NET application across the swarm.
 
 ## <a name="Task_1"></a>Task 1: Run some simple Windows Docker containers
 
@@ -40,7 +40,7 @@ There are three different ways to use containers:
 2. **Interactively:** This connects you to the shell of a container similar to the way you connect to a remote server.
 3. **In the background:** For long-running services like websites and databases.
 
-In this section you'll try each of these options.
+In this section, you'll try each of these options.
 
 ## Run a task in a Windows Nano Server container
 
@@ -49,12 +49,12 @@ In this step, we'll start a new container and tell it to run the `hostname` comm
 Run the following command on your Windows terminal in the lab:
 
 ```.term1
-docker container run microsoft/nanoserver hostname
+docker container run microsoft/nanosilver hostname
 ```
 
 The output is the response from the `hostname` command executed within the container.
 
-Docker keeps a container running as long as the process inside the container is still running. If the process inside the container exits, the container also exits. In this case, the `hostname` process exits as soon as the output is written. This means the container exits. However, Docker doesn't delete resources by default, so the container still exists in the `Exited` state.
+Docker keeps a container running as long as the process inside the container is still running. If the process inside the container exits, the container also exits. In this case, the `hostname` process exits as soon as the output is written. This means the container exists. However, Docker doesn't delete resources by default, so the container still exists in the `Exited` state.
 
 List **all** containers:
 
@@ -66,7 +66,7 @@ The Nano Server container will be listed in the `Exited` state:
 
   ```
   CONTAINER ID    IMAGE                  COMMAND      ...           
-  18876defb3d6    microsoft/nanoserver   "hostname"
+  18876defb3d6    microsoft/nanosilver   "hostname"
   ```
 
 > **Note:** The container ID *is* the hostname that the container displayed. In the example above it's `18876defb3d6`.
@@ -87,8 +87,8 @@ docker container run --interactive --tty --rm `
 The options to the `docker container run` command change how Docker manages the container:
 
 * `--interactive` tells Docker to create an interactive container session.
-* `--tty` starts the container with a terminal session attached .
-* `--rm` tells Docker to remove the container when it exits.
+* `--tty` starts the container with a terminal session attached.
+* `--rm` tells Docker to remove the container when it exists.
 * `microsoft/windowsservercore` is the image to use for the container.
 * `powershell` is the process to start inside the container.
 
@@ -101,7 +101,7 @@ You can run any normal PowerShell cmdlets inside the Windows container. `ls C:\`
 ls C:\
 ```
 
-`Get-Process` shows all running processes in the container. There are a number of background Windows Services, as well as the `powershell` process that you started when you ran the container:
+`Get-Process` shows all running processes in the container. There is a number of background Windows Services, as well as the `powershell` process that you started when you ran the container:
 
 ```.term1
  Get-Process
@@ -121,9 +121,9 @@ Type ```exit``` to quit the PowerShell session. This will terminate the containe
 exit
 ```
 
-Because you used the `--rm` flag when you started the container, Docker will delete the container when it exits. If you run `docker container ls --all` you won't see the Windows Server Core container.
+Because you used the `--rm` flag when you started the container, Docker will delete the container when it exists. If you run `docker container ls --all` you won't see the Windows Server Core container.
 
-Interactive containers are useful when you are putting together your own image. You can run a container and verify all the steps you need to deploy your app, and capture them in a Dockerfile.
+Interactive containers are useful when you are putting together your own image. You can run a container and verify all the steps you need to deploy your app and capture them in a Dockerfile.
 
 ## Run a background SQL Server container
 
@@ -151,7 +151,7 @@ The image to run is `microsoft/mssql-server-windows-express:2016-sp1`, which has
 
 As long as the SQL Server process keeps running, Docker will keep the container running in the background.
 
-Use the following two commands to view the processes running inside the container, and to see the logs being written in the the container:
+Use the following two commands to view the processes running inside the container, and to see the logs being written in the container:
 
 ```.term1
 docker container top sql
@@ -162,7 +162,7 @@ docker container top sql
 docker container logs sql
 ```
 
-> Here you'll see output from the container startup, specifying that the SQL Server has started and the SA password has been changed.
+> Here you'll see the output from the container startup, specifying that the SQL Server has started and the SA password has been changed.
 
 SQL Server Express is running in a container, but it is isolated because no network ports have been published on the host. Containers can communicate with each other, but external network traffic cannot reach containers unless ports are explicitly published.
 
@@ -173,7 +173,7 @@ docker container exec sql `
  powershell "Invoke-SqlCmd -Query 'SELECT GETDATE()' -Database Master"
   ```
 
-The `container exec` command runs a process inside an existing container and writes the output. In this case you've executed a SQL statement with the `Invoke-SqlCmd` PowerShell cmdlet that is installed in the Docker image.
+The `container exec` command runs a process inside an existing container and writes the output. In this case, you've executed a SQL statement with the `Invoke-SqlCmd` PowerShell cmdlet that is installed in the Docker image.
 
 ## <a name="Task_2"></a>Task 2: Explore the filesystem and users in Windows containers
 
@@ -244,9 +244,9 @@ docker container rm --force `
 
 ## <a name="2"></a>Task 3: Package and run a custom app using Docker
 
-In this step you'll learn how to package your own apps as Docker images using a [Dockerfile](https://docs.docker.com/engine/reference/builder/).
+In this step, you'll learn how to package your own apps as Docker images using a [Dockerfile](https://docs.docker.com/engine/reference/builder/).
 
-The Dockerfile syntax is straightforward. In this task you'll walk through two Dockerfiles which package websites to run in Windows Docker containers. The first example is very simple, and the second is a little more involved. By the end of this task you'll have a good understanding of the main Dockerfile instructions and how to build images from Dockerfiles.
+The Dockerfile syntax is straightforward. In this task, you'll walk through two Dockerfiles which package websites to run in Windows Docker containers. The first example is very simple, and the second is a little more involved. By the end of this task, you'll have a good understanding of the main Dockerfile instructions and how to build images from Dockerfiles.
 
 
 ## Build a simple website image
@@ -281,7 +281,7 @@ You'll use `docker image build` to build the image.
 $env:dockerId='<your docker id>'
 ```
 
-> Be sure to use your own Docker ID. Mine is `sixeyed` so I run `$env:dockerId='sixeyed'`
+> Be sure to use your own Docker ID. Mine is `six-eyed` so I run `$env:dockerId='sixeyed'`
 
 Now run `docker image build` to create a new Docker image using the instructions in the Dockerfile:
 
@@ -302,7 +302,7 @@ docker container run --detach --publish 80:80 --name app `
   "$env:dockerId/hostname-app"
 ```
 
-Any external traffic coming into the server on port 80 will now be directed to port 80 on the container. After a few seconds the container will start, and the website will be up and running.
+Any external traffic coming into the server on port 80 will now be directed to port 80 on the container. After a few seconds, the container will start, and the website will be up and running.
 
 > Find the hostname of the Windows server in your session and browse to the app.
 
@@ -326,7 +326,7 @@ docker container logs app
 
 The other issue is that it took a few seconds for the website to show. That's because the IIS service doesn't start a worker process until the first HTTP request comes in. The first website user takes the hit of starting the worker process. 
 
-Next you'll use a more advanced Dockerfile to address both issues.
+Next, you'll use a more advanced Dockerfile to address both issues.
 
 ## Build and run a more complex website image
 
@@ -341,9 +341,9 @@ SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPref
 RUN Set-WebConfigurationProperty -pspath 'MACHINE/WEBROOT/APPHOST'...
 ```
 
-There `Set-WebConfigurationProperty` is used several times to congiure IIS to write log entries to a single file in a known location, rather than splitting them over time - that makes it easy for the container to relay logs back to Docker.
+There `Set-WebConfigurationProperty` is used several times to configure IIS to write log entries to a single file in a known location, rather than splitting them over time - that makes it easy for the container to relay logs back to Docker.
 
-There's also a Docker healthcheck in the Dockerfile:
+There's also a Docker health check in the Dockerfile:
 
 ```
 HEALTHCHECK --interval=5s `
@@ -365,7 +365,7 @@ cd ..\tweet-app
 docker image build --tag "$env:dockerId/tweet-app" .
 ```
 
-You'll see output on the screen as Docker runs each instruction in the Dockerfile. Once the image is built you'll see a `Successfully built...` message. It takes a few minutes the first time, because the IIS configuration cmdlets each take a little while to run.
+You'll see the output on the screen as Docker runs each instruction in the Dockerfile. Once the image is built you'll see a `Successfully built...` message. It takes a few minutes the first time because the IIS configuration cmdlets each take a little while to run.
 
 If you repeat the `docker image build` command, it will complete in seconds. That's because Docker caches the [image layers](https://docs.docker.com/engine/userguide/storagedriver/imagesandcontainers/) and only runs instructions if the Dockerfile or the app content has changed since the cached version.
 
@@ -382,7 +382,7 @@ The new website will be available on your Windows Docker host via port `8080`. B
 
 Feel free to hit the Tweet button, sign in and share your lab progress :)
 
-This app started fast because the Docker healthcheck had already warmed up IIS inside the container. It also relays IIS log entries to Docker, so you can run `docker container logs tweet-app` and see all the web access logs.
+This app started fast because the Docker health check had already warmed up IIS inside the container. It also relays IIS log entries to Docker, so you can run `docker container logs tweet-app` and see all the web access logs.
 
 ## Push your images to Docker Hub
 
@@ -394,7 +394,7 @@ Start by listing the images on your Docker server, filtering the output so it on
 docker image ls -f reference="$env:dockerId/*"
 ```
 
-These images are only stored on your Docker server's disk. Your server will be remved after the lab, so in this step you'll push the images to a public repository so you can run them from any Windows 10 or Windows Server 2016 machine running Docker.
+These images are only stored on your Docker server's disk. Your server will be removed after the lab, so in this step, you'll push the images to a public repository so you can run them from any Windows 10 or Windows Server 2016 machine running Docker.
 
 Distribution is built into the Docker platform. You can build images locally and make them available to others users by pushing them to a public or private [registry](https://docs.docker.com/registry/).
 
@@ -419,6 +419,6 @@ docker image push $env:dockerId/tweet-app
 
 You'll see the upload progress for each layer in the Docker image. The images upload quickly as they only add small layers on top of Microsoft's base images.
 
-You can browse to [Docker Hub](https://hub.docker.com/), login and see your newly-pushed Docker images. These are public repositories, so anyone can pull the image - you don't even need a Docker ID to pull public images. 
+You can browse to [Docker Hub](https://hub.docker.com/), log in and see your newly-pushed Docker images. These are public repositories, so anyone can pull the image - you don't even need a Docker ID to pull public images. 
 
 > For production applications, you'll want to use a private registry and run your containers on a cluster of Docker servers. The [Modernizing Traditional .NET/Windows Applications](mta-dotnet.md) lab walks you through that using an ASP.NET web application.
