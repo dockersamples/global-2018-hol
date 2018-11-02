@@ -30,7 +30,7 @@ docker container rm --force `
   $(docker container ls --quiet --all)
 ```
 
-> In this lab you'll work with the Windows node directly. Once you have a good understanding of Windows containers, you can do the [Modernizing Traditional .NET/Windows Applications](TODO) lab, which deploys a distibuted .NET application across the swarm.
+> In this lab you'll work with the Windows node directly. Once you have a good understanding of Windows containers, you can do the [Modernizing Traditional .NET/Windows Applications](TODO) lab, which deploys a distributed .NET application across the swarm.
 
 ## <a name="Task_1"></a>Task 1: Run some simple Windows Docker containers
 
@@ -151,7 +151,7 @@ The image to run is `microsoft/mssql-server-windows-express:2016-sp1`, which has
 
 As long as the SQL Server process keeps running, Docker will keep the container running in the background.
 
-Use the following two commands to view the processes running inside the container, and to see the logs being written in the the container:
+Use the following two commands to view the processes running inside the container, and to see the logs being written in the container:
 
 ```.term1
 docker container top sql
@@ -394,13 +394,13 @@ Start by listing the images on your Docker server, filtering the output so it on
 docker image ls -f reference="$env:dockerId/*"
 ```
 
-These images are only stored on your Docker server's disk. Your server will be remved after the lab, so in this step you'll push the images to a public repository so you can run them from any Windows 10 or Windows Server 2016 machine running Docker.
+These images are only stored on your Docker server's disk. Your server will be removed after the lab, so in this step you'll push the images to a public repository so you can run them from any Windows 10 or Windows Server 2016 machine running Docker.
 
 Distribution is built into the Docker platform. You can build images locally and make them available to others users by pushing them to a public or private [registry](https://docs.docker.com/registry/).
 
 [Docker Hub](https://hub.docker.com) is the default public registry for Docker images.
 
-Before you can push your images, you'll need to login to Docker Hub:
+Before you can push your images, you'll need to log in to Docker Hub:
 
 ```.term1
 docker login --username $env:dockerId
