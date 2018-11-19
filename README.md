@@ -73,3 +73,9 @@ The Docker Platform has built in a number of features that make it the most secu
 
 ### [Modernizing Traditional Java Applications](/mta-java/)
 Moving an application to Docker doesn't mean you have to re-write your whole application. In this lab, you'll containerize an older, monolithic Java application without changing any code. And you'll see the benefit of running it on Docker. Then in a few simple steps you'll build additional services in separate containers, breaking features out of the monolith into separate containers, without rewriting the app. 
+
+### [Docker EE with Kubernetes](https://github.com/dockersamples/ee-workshop)
+Docker EE 2.0 is the first Containers-as-a-Service platform to offer production-level support for the integrated management and security of both Linux and Windows Server Containers. It is also the first platform to support both Docker Swarm and Kubernetes orchestration.
+
+In this lab we'll use a Docker EE cluster comprised of Windows and Linux nodes. We'll deploy both a Java web app on Linux and a multi-service application that includes both Windows and Linux components using Docker Swarm. Then we'll take a look at securing and scaling the application. Finally, we will then deploy the app using Kubernetes.
+
