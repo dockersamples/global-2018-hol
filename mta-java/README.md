@@ -15,8 +15,6 @@ In this Hands-on Lab, we will show you how to take a traditional Java EE app, an
 
 This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
 
-# TODO: Add Link to Environment
-
 If none of these apply to you, contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com).
 
 There are three main components to the Play With Docker (PWD) interface. 
@@ -122,7 +120,7 @@ You should see something similar to the example below on the second line of the 
 
 ```
 FROM node:latest AS build
-API_HOST=ip172-18-0-8-baug157oeapg00e0p4hg.direct.ee-beta2.play-with-docker.com:8080
+ENV API_HOST=ip172-18-0-8-baug157oeapg00e0p4hg.direct.ee-beta2.play-with-docker.com:8080
 ```
 
 React uses Node.js to build a static site for the interface. The Dockerfile is much simpler than the one for the movieplex7 app, using a single-stage build. When it runs, it will start a simple Node server that serves the React pages, and exposes them on port 3000. We’ll deploy it in the next section.
@@ -320,7 +318,7 @@ spec:
           name: react-client
     
 ```
-After kubernetes has deployed the application, the `Controllers` window shows thw deployments and services as well as the pods deployed. 
+After kubernetes has deployed the application, the `Controllers` window shows the deployments and services as well as the pods deployed. 
 
 ![Controllers](./images/k8s_controllers.png)
 
