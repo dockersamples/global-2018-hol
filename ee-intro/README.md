@@ -15,8 +15,6 @@ Docker Enterprise Edition is....
 ### <a name="task1.1"></a> Task 1.1: Access Play with Docker environment
 In order to run the lab, we have provided a Docker Enterprise Edition *Play with Docker* environment for you to use. This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
 
-# TODO:Provide a link to the environment
-
 When you open it, it'll look something like this
 
 ![Docker EE Environment](../images/pwd-linonly.png)
@@ -61,7 +59,7 @@ For this task you will create a service that runs an NGINX webserver. Just the d
 
   ![](../images/nginx_service.png)
 
-6. Click on the service and you will see the configuration. Find the link to `Published Endpoints` and click on that.
+6. Click on the service and you will see the configuration. Find `Endpoints` and copy the URL. Open that in a new tab.
   ![](../images/nginx_published.png)
 
 7. This should open up the default NGINX web page.
@@ -78,7 +76,7 @@ For this task you will create a service that runs an NGINX webserver. Just the d
 
   ![](../images/create_stack.png)
 
-2. Name the stack `vote`, select `Swarm Services`, and paste the following compose file into the editor. Then click `Create` in the lower right.
+2. Name the stack `vote`, select `Swarm Services`, click `Next` and paste the following compose file into the editor. Then click `Create` in the lower right.
 
   ```
   version: "3"
@@ -187,7 +185,7 @@ For this task you will create a service that runs an NGINX webserver. Just the d
 
   ![](../images/vote_two.png)
 
-8. Go back to UCP. Make sure `vote_vote` is selected, and scroll down the right panel until you see a link for `2 task(s)`. Click on that.
+8. Go back to UCP. Make sure `vote_vote` is selected, and scroll down the right panel until the two tasks.
 
   ![](../images/vote_two_tasks.png)
 
