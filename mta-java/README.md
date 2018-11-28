@@ -15,8 +15,6 @@ In this Hands-on Lab, we will show you how to take a traditional Java EE app, an
 
 This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
 
-# TODO: Add Link to Environment
-
 If none of these apply to you, contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com).
 
 There are three main components to the Play With Docker (PWD) interface. 
@@ -64,7 +62,7 @@ First, set an environment variable `DTR_HOST` using the DTR host name defined on
 
 ![](./images/session-information.png) 
 
-	```bash
+	```.bash
 	$ export DTR_HOST=<dtr hostname>
 	$ echo $DTR_HOST
 	```
@@ -114,7 +112,7 @@ cd ..
 Due to a quirk in how React is built, and the base url of the Play with Docker lab, before you build the React client you need to run a script to inject the host URL into the Dockerfile. 
 
 ```
-./add_ee_kube_pwd_host.sh
+./add_ee_pwd_host.sh
 cat ./react-client/Dockerfile
 ```
 
@@ -122,7 +120,7 @@ You should see something similar to the example below on the second line of the 
 
 ```
 FROM node:latest AS build
-API_HOST=ip172-18-0-8-baug157oeapg00e0p4hg.direct.ee-beta2.play-with-docker.com:8080
+ENV API_HOST=ip172-18-0-8-baug157oeapg00e0p4hg.direct.ee-beta2.play-with-docker.com:8080
 ```
 
 React uses Node.js to build a static site for the interface. The Dockerfile is much simpler than the one for the movieplex7 app, using a single-stage build. When it runs, it will start a simple Node server that serves the React pages, and exposes them on port 3000. We’ll deploy it in the next section.
@@ -320,22 +318,16 @@ spec:
           name: react-client
     
 ```
-After kubernetes has deployed the application, the `Controllers` window shows thw deployments and services as well as the pods deployed. 
+After kubernetes has deployed the application, the `Controllers` window shows the deployments and services as well as the pods deployed. 
 
 ![Controllers](./images/k8s_controllers.png)
 
-Click on `Load Balancers` brings up the Load Balancer window and clicking on movieplex7 displays a detailed configuration menu that includes the external URL of the application. Note that the URL assigns a port that isn't 8080, but because the `hostPort` is set in the movieplex7 deployment, the application is also accessible through port 8080. This is important because the react-client uses a known endpoint to retrieve data from the REST interface.
+Click on `Load Balancers` brings up the Load Balancer window and clicking on `react-client` displays a detailed configuration port of the application. This shows you the `Node Port` Kubneretes has assigned to your application.
 
-![Load balancer](./images/lb_movieplex.png)
-
-Note the URL of the movieplex7 application.
-
-![Movieplex](./images/client_movieplex.png)
-
-In the case of the react-client, port 80 is already in use by Docker Enterprise Edition and kubernetes assigns an unused port.
-
-![Load balancer](./images/lb_react-client.png)
+![Load balancer](./images/lb_react.png)
 
 The react-client can still send requests to the movieplex7 REST endpoint, but uses another port in its URL instead of port 80.
+
+Copy the `UCP Hostname` from the Play with Docker landing page into a browser address bar, and add the `Node Port` and this will bring up the application.
 
 ![Movieplex](./images/client_react.png)
