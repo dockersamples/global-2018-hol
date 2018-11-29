@@ -2,7 +2,7 @@
 services:
 
   signup-homepage:
-    image: <your-dtr-domain>/mta-dev-signup-homepage:v1
+    image: <your-dtr-domain>/dockersamples/mta-dev-signup-homepage:v1
     deploy:
       endpoint_mode: dnsrr
       placement:
@@ -27,7 +27,7 @@ services:
       - app-net
 
   signup-db:
-    image: <your-dtr-domain>/mta-dev-signup-db:v1
+    image: <your-dtr-domain>/dockersamples/mta-dev-signup-db:v1
     deploy:
       endpoint_mode: dnsrr
       placement:
@@ -47,7 +47,7 @@ services:
       - app-net
 
   signup-save-handler:
-    image: <your-dtr-domain>/mta-dev-signup-save-handler:v1
+    image: <your-dtr-domain>/dockersamples/mta-dev-signup-save-handler:v1
     deploy:
       endpoint_mode: dnsrr
       placement:
