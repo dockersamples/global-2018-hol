@@ -13,7 +13,7 @@ services:
       - app-net
 
   signup-app:
-    image: <your-dtr-domain>/dockersamples/mta-dev-signup-app:v4
+    image: dockersamples/mta-dev-signup-app:v4
     ports:
     - mode: host
       published: 80
@@ -27,7 +27,7 @@ services:
       - app-net
 
   signup-db:
-    image: <your-dtr-domain>/dockersamples/mta-dev-signup-db:v1
+    image: dockersamples/mta-dev-signup-db:v1
     deploy:
       endpoint_mode: dnsrr
       placement:
@@ -47,7 +47,7 @@ services:
       - app-net
 
   signup-save-handler:
-    image: <your-dtr-domain>/dockersamples/mta-dev-signup-save-handler:v1
+    image: dockersamples/mta-dev-signup-save-handler:v1
     deploy:
       endpoint_mode: dnsrr
       placement:
