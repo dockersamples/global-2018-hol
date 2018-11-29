@@ -27,6 +27,12 @@ The left-hand navigation lists all the nodes you can connect to. Select the Wind
 
 The Play with Docker environment is where you will run all of the commands in this lab.
 
+First make sure Docker is running - it runs as a background Windows Service:
+
+```
+Start-Service docker
+```
+
 If you have used this environment for other labs, first remove any existing containers:
 
 ```.term1
