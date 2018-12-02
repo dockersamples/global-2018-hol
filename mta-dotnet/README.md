@@ -4,7 +4,7 @@ You can run full .NET Framework apps in Docker on Windows containers. This hands
 
 The app you'll be using is the same one from the video series [Modernizing .NET Apps for Developers](https://blog.docker.com/2018/02/video-series-modernizing-net-apps-developers/). This lab will get you experienced in using Docker to modernize traditional .NET applications, and then you can watch the video series for more in-depth walkthroughs.
 
-> If you aren't familar with the basic concepts of Docker, you can start with the [Docker Windows 101](./windows.md) lab before running this lab.
+> If you aren't familiar with the basic concepts of Docker, you can start with the [Docker Windows 101](./windows.md) lab before running this lab.
 
 ## Table of Contents
 
@@ -40,7 +40,7 @@ docker container rm --force `
   $(docker container ls --quiet --all)
 ```
 
-> To start with you'll work with the Windows node directly, but at the end of the lab you'll deploy to the cluster to see how to run applications in production with Docker EE.
+> To start with you'll work with the Windows node directly, but at the end of the lab you'll deploy to the cluster to see how to run applications in production with Docker Enterprise.
 
 ## <a name="1"></a>Task 1: Running the app in a container
 
@@ -87,7 +87,7 @@ RUN .\build.ps1
 
 The `dockersamples/mta-dev-web-builder:3.5` image has .NET 3..5, MSBuild, NuGet and the Web Deploy packages installed, so it has the full toolchain to compile an ASP.NET 3.5 application. (Here's the <a href="https://github.com/dockersamples/mta-netfx-dev/blob/part-1/docker/web-builder/3.5/Dockerfile" target="_blank">Dockerfile for the build image</a>).
 
-In the `builder` stage, the Dockerfile copies the source code into the image and just runs the existing <a href="https://github.com/dockersamples/mta-netfx-dev/blob/part-1/src/SignUp/SignUp.Web/build.ps1" target="_blank">build.ps1</a>) script. When this stage completes, the output is a published website folder, which is be available for later stages to use.
+In the `builder` stage, the Dockerfile copies the source code into the image and just runs the existing <a href="https://github.com/dockersamples/mta-netfx-dev/blob/part-1/src/SignUp/SignUp.Web/build.ps1" target="_blank">build.ps1</a>) script. When this stage completes, the output is a published website folder, which will be available for later stages to use.
 
 The second stage uses the `microsoft/aspnet:3.5` image as the base, which is a Windows Server Core image with IIS and ASP.NET 3.5 already configured:
 
@@ -164,7 +164,7 @@ The next version of the app uses a new architecture:
 
 ![V3 application architecture](./images/part-3-architecture.png)
 
-Now when users save data, the web app publishes an event to a message queue. A message handler listens for those event and makes the SQL Server calls. This architecture does scale, because the message queue smooths out any peaks in traffic.
+Now when users save data, the web app publishes an event to a message queue. A message handler listens for those events and makes the SQL Server calls. This architecture does scale, because the message queue smooths out any peaks in traffic.
 
 Switch to the `part-3` branch which has the new version of the app, and build it using Docker Compose:
 
@@ -204,7 +204,7 @@ ENV APP_ROOT="C:\web-app" `
 
 - `APP_ROOT` is the path where the application content gets stored in the image, stored in a variable because it gets used in multiple places
 
-- `MESSAGE_QUEUE_URL` is the URL of the message queue. The web app uses an environment variables for this configuration, the default value expects to find the message queue in a container called `message-queue`
+- `MESSAGE_QUEUE_URL` is the URL of the message queue. The web app uses an environment variable for this configuration, the default value expects to find the message queue in a container called `message-queue`
 
 - `DB_CONNECTION_STRING_PATH` is the path to the .NET config file that contains the database connection string. The blank value means the app loads the default config file, but this enables the app to use Docker secrets for the connection string.
 
@@ -233,7 +233,7 @@ Check that your new data is there in the SQL Server container:
 docker container exec app_signup-db_1 powershell -Command "Invoke-SqlCmd -Query 'SELECT * FROM Prospects' -Database SignUpDb"
 ```
 
-> You'll see both sets of details you saved, because this version of the app uses the same database container as the last version.
+> You'll see both sets of details you saved because this version of the app uses the same database container as the last version.
 
 And look at the logs for the message handler - you'll see entries showing that it has received a message and saved the data:
 
@@ -283,7 +283,7 @@ docker-compose `
   up -d
 ```
 
-You'll see that a new homepage container gets started, and the web app container gets replaced with a new  container. 
+You'll see that a new homepage container gets started, and the web app container gets replaced with a new container. 
 
 > There are some other containers started too, they're part of the [MTA .NET video series](https://blog.docker.com/2018/02/video-series-modernizing-net-apps-developers/), but you don't need to use them here.
 
@@ -295,9 +295,9 @@ Now when the ASP.NET web container receives a request, it calls out to the homep
 
 If the product team don't like the new UI, they can easily replace it by building a new homepage and replacing the homepage container. The web app container doesn't need to change, so there are no regression tests to run.
 
-> The app has a modern architecture now, powered by Docker and without needing a full rewrite. You've extracted key features from the app and run them in separate container, using Docker to plug everything together, and to give you a consistent build and deployment process for the whole solution.
+> The app has a modern architecture now, powered by Docker and without needing a full rewrite. You've extracted key features from the app and run them in separate containers, using Docker to plug everything together, and to give you a consistent build and deployment process for the whole solution.
 
-So far you've been running the application using Docker on the Windows node. Next you'll learn how to push the images to a private registry and run the app in cluster with Docker swarm mode.
+So far you've been running the application using Docker on the Windows node. Next you'll learn how to push the images to a private registry and run the app in a cluster with Docker swarm mode.
 
 ## <a name="4"></a>Step 4: Push Images to Docker Trusted Registry
 
@@ -330,7 +330,7 @@ docker image tag `
   "$($env:dtrDomain)/dockersamples/mta-dev-signup-homepage:v1"
 ```
 
-Next you need to create an organization to group image repositories for the images you want to store. First click on the `DTR` button the left side bar and log into DTR using the same `admin` credentials in the Session Information panel (**ignore the security warnings - the lab environment uses self-signed HTTPS certificates**).
+Next you need to create an organization to group image repositories for the images you want to store. First click on the `DTR` button the left sidebar and log into DTR using the same `admin` credentials in the Session Information panel (**ignore the security warnings - the lab environment uses self-signed HTTPS certificates**).
 
 Click on the _Organizations_ link on the left-hand navigation, and then the _New organization_ button:
 
@@ -369,7 +369,7 @@ The web image is now stored in a private registry with rich access controls, and
 
 ## <a name="5"></a> Step 5: Deploy on Universal Control Plane
 
-Your lab environment has a Docker EE cluster set up, but the Windows node is not yet part of the cluster. Open the terminal window for the `manager1` node and get the join token for adding new nodes to the swarm:
+Your lab environment has a Docker Enterprise cluster set up, but the Windows node is not yet part of the cluster. Open the terminal window for the `manager1` node and get the join token for adding new nodes to the swarm:
 
 ```
 docker swarm join-token worker
@@ -385,7 +385,7 @@ Now we can switch to the UCP UI. Click on the UCP button to launch the UCP windo
 
 > DTR and UCP have single sign-on support so you don't need to log in again - in a production environment you can also use your existing AD or LDAP provider for authentication.
 
-Next you'll deploy the application using Docker swarm mode as the orchestrator. The latest version of Docker EE supports Kubernetes, but Windows containers are still in beta with Kubernetes, so we will use swarm mode. 
+Next you'll deploy the application using Docker swarm mode as the orchestrator. The latest version of Docker Enterprise supports Kubernetes, but Windows containers are still in beta with Kubernetes, so we will use swarm mode. 
 
 The application image in DTR is private, only authenticated users can access it. UCP can pull a private image onto all nodes in the cluster. On the left-navigation panel, click _Shared Resources_ and then _Images_. You'll see all the images currently pulled on the cluster. Click _Pull Image_ to pull the app image from DTR:
 
@@ -440,4 +440,4 @@ Soon all the services will be running at 100%:
 
 The new version is available on your same Windows Docker host. Browse to the Windows server as before - using the hostname from _Session Information_.
 
-Here there are 9 containers running as swarm services for my application, and with Docker EE yo can also run Linux containers as a Kubernetes stack. You use DTR to ship, scan and sign all your images, and UCP to manage all your apps - a consistent platform for any type of application.
+Here there are 9 containers running as swarm services for my application, and with Docker Enterprise you can also run Linux containers as a Kubernetes stack. You use DTR to ship, scan and sign all your images, and UCP to manage all your apps - a consistent platform for any type of application.
