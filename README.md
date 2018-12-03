@@ -69,7 +69,7 @@ You've been learning about Docker, here's a chance to get a hands on introductio
 Docker Enterprise Edition (EE) is a Containers-as-a-Service platform that manages and secures diverse applications across disparate infrastructure, both on-premises and in the cloud. This workshop will introduce you to the basics of creating and deploying an app on Docker EE. 
 
 ### [Docker Security](/security/)
-The Docker Platform has built in a number of features that make it the most secure way to deploy containerized applications across disparate infrastructure. This lab will explore features such as Security Scanning, Role Based Access Control, Security Policies, and Docker Content Trust.
+The Docker Platform has built in a number of features that make it the most secure way to deploy containerized applications across disparate infrastructure. This lab will explore features such as Security Scanning, Security Policies, and Docker Content Trust.
 
 ### [Modernizing Traditional Java Applications](/mta-java/)
 Moving an application to Docker doesn't mean you have to re-write your whole application. In this lab, you'll containerize an older, monolithic Java application without changing any code. And you'll see the benefit of running it on Docker. Then in a few simple steps you'll build additional services in separate containers, breaking features out of the monolith into separate containers, without rewriting the app. 
