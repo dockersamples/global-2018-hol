@@ -8,7 +8,7 @@ The main theme is [modernizing traditional .NET / Windows applications](/mta-dot
 
 ![](./images/pwd_screen.png)
 
-This workshop is only available to people doing a Hands-on Lab at one of Docker's in-person events. The environment will be based on [Play with Docker](https://labs.play-with-docker.com/).
+This workshop is only available to people doing a Hands-on Lab at one of Docker's in-person events. The environment will be based on [Play with Docker](https://dockr.ly/dceu-hol).
 
 If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
 
