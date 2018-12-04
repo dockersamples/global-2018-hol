@@ -12,6 +12,8 @@ This workshop is only available to people doing a Hands-on Lab at one of Docker'
 
 If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
 
+> Note you may need to open in a private or incognito session, or disable all extensions to use the Play with Docker interface. It is also possible that some corporate proxies and firewalls will make Play with Docker difficult to use.
+
 There are three main components to the Play With Docker (PWD) interface. 
 
 ### 1. Console Access
