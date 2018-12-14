@@ -13,9 +13,7 @@ In this Hands-on Lab, we will show you how to take a traditional Java EE app, an
 
 # Step 0: The Play with Docker Lab Environment
 
-This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
-
-If none of these apply to you, contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com).
+> This lab was originally designed to run in a special Docker Enterprise Play with Docker environment that is provided at special events and workshops, where a URL will be provided to you. If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information or contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com).
 
 There are three main components to the Play With Docker (PWD) interface. 
 

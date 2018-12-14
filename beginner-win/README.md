@@ -11,9 +11,8 @@ In this lab we'll help you get familiar with running Docker on Windows. We'll lo
 
 ## <a name="0"></a>Step 0: The Play with Docker Lab Environment
 
-Start a Docker Enterprise Edition session at the URL provided by your workshop organizer. This is a hybrid cluster, with Linux and Windows nodes.
+> This lab was originally designed to run in a special Docker Enterprise Play with Docker environment that is provided at special events and workshops, where a URL will be provided to you. If you do not have this environment, you can try a commandline environment, [Docker Desktop](https://www.docker.com/products/docker-desktop) for Windows or Docker on Windows Server. These labs haven't been fully tested there and it will differ from the images provided. This lab will not work on Docker Desktop for Mac. If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information or contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com). 
 
-# TODO: Add Link to Environment
 
 The left-hand navigation lists all the nodes you can connect to. Select the Windows node - the name will start with `win0000` - and the terminal window in the right-hand pane connects to a PowerShell session on the Windows node:
 

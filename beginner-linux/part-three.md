@@ -1,5 +1,6 @@
 # Docker for Beginners - Linux Part Three
-In order to run the lab, we have provided a Docker Enterprise Edition *Play with Docker* environment for you to use. This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
+> This lab was originally designed to run in a special Docker Enterprise Play with Docker environment that is provided at special events and workshops, where a URL will be provided to you. If you do not have this environment, you can try a commandline environment, [Docker Desktop](https://www.docker.com/products/docker-desktop) or the [Play with Docker plain interface](https://labs.play-with-docker.com/). These labs haven't been fully tested there and it will differ from the images provided. If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information or contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops.
+
 
 When you open it, it'll look something like this
 
@@ -20,7 +21,7 @@ The voting app is a multi-container application often used for demo purposes dur
 
 ## Initialize Your Swarm
 
-In most cases, first thing we would need to do is tell our Docker hosts we want to use Docker Swarm Mode. Because we're using the *Play with Docker* environment, the Swarm is already configured. So this is mostly for your information.
+In most cases, first thing we would need to do is tell our Docker hosts we want to use Docker Swarm Mode. Because we're using the *Play with Docker* environment, the Swarm is already configured. So this is mostly for your information. If you're not using the Enterprise Play with Docker environment, you will need to configure your swarm.
 
 Swarms *can* be just a single node, but that is unusual as you would have no high availability capabilities and you would severely limit your scalability. Most production swarms have at least three *manager* nodes in them and many *worker* nodes. Three managers is the minimum to have a true high-availability cluster with quorum. Note that manager nodes can run your container tasks the same as a worker node, but this functionality can also be separated so that managers only perform the management tasks. Of course in this test environment there is only one manager node.
 

@@ -2,7 +2,7 @@
 
 In this lab you will explore the basics of how the Docker Engine executes and isolates containers from each other. If you already have experience running containers and basic Docker commands you can probably skip this intro exercise.
 
-In order to run the lab, we have provided a Docker Enterprise Edition *Play with Docker* environment for you to use. This workshop is only available to people in doing a [Hands-on-Lab at DockerCon 2018](https://2018.dockercon.com/hands-on-labs/).
+> This lab was originally designed to run in a special Docker Enterprise Play with Docker environment that is provided at special events and workshops, where a URL will be provided to you. If you do not have this environment, you can try a commandline environment, [Docker Desktop](https://www.docker.com/products/docker-desktop) or the [Play with Docker plain interface](https://labs.play-with-docker.com/). These labs haven't been fully tested there and it will differ from the images provided. If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information or contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops.
 
 When you open it, it'll look something like this
 

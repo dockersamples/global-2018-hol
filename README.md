@@ -4,11 +4,12 @@ Welcome to your local edition of this season's Docker global event series! From 
 
 The main theme is [modernizing traditional .NET / Windows applications](/mta-dotnet/)! But as you'll see below we also have a number of other labs available on a variety of topics and for different skill levels, including for beginners. Partner with your neighbor, work in a small group, let your Community Leader know if you need a hand and tweet at @Docker using #LearnDocker to share some pics!
 
+> These workshops were designed to work in a Play with Docker Enterprise interface that is only available at special events and workshops. Some of them will work on commandline only, but haven't been tested outside the environment. For a commandline environment, you can use [Docker Desktop](https://www.docker.com/products/docker-desktop) or the [Play with Docker plain interface](https://labs.play-with-docker.com/). If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information.
+
 ## Understanding the Play With Docker Interface
 
 ![](./images/pwd_screen.png)
 
-This workshop is only available to people doing a Hands-on Lab at one of Docker's in-person events. The environment will be based on [Play with Docker](https://dockr.ly/dceu-hol).
 
 If that doesn't apply to you, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com) or the [Play with Kubernetes Classroom](https://training.play-with-kubernetes.com/).
 
