@@ -6,11 +6,8 @@
 
 > **Time**: Approximately 15 minutes
 
-In this lab you'll learn how to use Docker EE and more particularily 
-Universal Control Plane (UCP) to create a *secret* in Docker Swarm and use it with an application.
+> This lab was originally designed to run in a special Docker Enterprise Play with Docker environment that is provided at special events and workshops, where a URL will be provided to you. If you would like to try Docker Enterprise, [please contact sales](https://www.docker.com/company/contact-sales) for more information or contact your local [Docker Meetup Chapter](https://events.docker.com/chapters/) and ask if there are any scheduled workshops. In the meantime, you may be interested in the labs available through the [Play with Docker Classroom](https://training.play-with-docker.com).
 
-A version of this lab is available on Docker Docs Website
-[here](https://docs.docker.com/ee/ucp/swarm/use-secrets/#use-secrets-in-your-services).
 
 You will complete the following steps as part of this lab.
 

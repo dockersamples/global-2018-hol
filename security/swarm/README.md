@@ -24,7 +24,8 @@ You will need all of the following to complete this lab:
 
 - Four Linux-based Docker hosts running **Docker 1.13** or higher and **not**
 configured for Swarm Mode. You should use **node1**, **node2**, **node3**, and
-**node4** from your lab.
+**node4** from your lab. If you don't have that environment, you can use [Play with Docker](https://labs.play-with-docker.com) for an in-browser experience.
+
 - This lab was built and tested using Ubuntu 16.04
 
 >NOTE: Things like IP addresses and Swarm *join tokens* will be different in
