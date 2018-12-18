@@ -233,7 +233,7 @@ with Docker Content Trust seemlessly. Let's have a look at what happens:
 
 1. Log in Docker Trusted Registry in your browser and create a new repo
 
-Visit `https://[my-dtr-instance].ee-beta2.play-with-docker.com` and create
+Visit `https://[my-dtr-instance].beta-hybrid.play-with-docker.com` and create
 a new user in the `Users` tab on the left.
 
 Then visit the `Repositories` tab on the left and create a new repository for
@@ -248,7 +248,7 @@ the user you just created: `[user]/myalpine` with the default options.
    Digest: sha256:e1871801d30885a610511c867de0d6baca7ed4e6a2573d506bbec7fd3b03873f
    Status: Image is up to date for alpine:latest
 
-   $ docker tag [my-dtr-instance].ee-beta2.play-with-docker.com/[user]/myalpine
+   $ docker tag alpine:latest [my-dtr-instance].beta-hybrid.play-with-docker.com/[user]/myalpine
    ```
 
 This step will pull the `alpine` image from the registry and rename it so that
@@ -257,7 +257,7 @@ Docker knows where the remote location of the image is.
 3. Log in DTR on the CLI
 
    ```
-   $ docker login [my-dtr-instance].ee-beta2.play-with-docker.com
+   $ docker login [my-dtr-instance].beta-hybrid.play-with-docker.com
 
    Username: [user]
    Password: [password]
@@ -267,9 +267,9 @@ Docker knows where the remote location of the image is.
 4. Activate Docker Content Trust and push your new image
 
    ```
-   $ DOCKER_CONTENT_TRUST=1 docker push ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine:latest
+   $ DOCKER_CONTENT_TRUST=1 docker push [my-dtr-instance].beta-hybrid.play-with-docker.com/nass/myalpine:latest
 
-   The push refers to a repository [ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine]
+   The push refers to a repository [ip172-18-0-14-bce59utdffhg00b2tfs0.direct.beta-hybrid.play-with-docker.com/nass/myalpine]
    cd7100a72410: Layer already exists
    latest: digest: sha256:8c03bb07a531c53ad7d0f6e7041b64d81f99c6e493cb39abba56d956b40eacbc size: 528
    Signing and pushing trust metadata
@@ -281,10 +281,10 @@ Docker knows where the remote location of the image is.
    way to recover this key. You can find the key in your config directory.
    Enter passphrase for new root key with ID 405789e:
    Repeat passphrase for new root key with ID 405789e:
-   Enter passphrase for new repository key with ID 86a5a55 (ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine):
-   Repeat passphrase for new repository key with ID 86a5a55 (ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine):
-   Finished initializing "ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine"
-   Successfully signed "ip172-18-0-14-bce59utdffhg00b2tfs0.direct.ee-beta2.play-with-docker.com/nass/myalpine":latest
+   Enter passphrase for new repository key with ID 86a5a55 (ip172-18-0-14-bce59utdffhg00b2tfs0.direct.beta-hybrid.play-with-docker.com/nass/myalpine):
+   Repeat passphrase for new repository key with ID 86a5a55 (ip172-18-0-14-bce59utdffhg00b2tfs0.direct.beta-hybrid.play-with-docker.com/nass/myalpine):
+   Finished initializing "ip172-18-0-14-bce59utdffhg00b2tfs0.direct.beta-hybrid.play-with-docker.com/nass/myalpine"
+   Successfully signed "ip172-18-0-14-bce59utdffhg00b2tfs0.direct.beta-hybrid.play-with-docker.com/nass/myalpine":latest
    ```
 
 5. Verify your signed images in Docker Trusted Registry
@@ -304,16 +304,16 @@ signing policies. Let's have a quick look at what's available!
 1. Set the Docker Content Trust Server (Docker Trusted Registry in our case)
 
    ```
-   $ export DOCKER_CONTENT_TRUST_SERVER="https://[my-dtr-instance].ee-beta2.play-with-docker.com"
+   $ export DOCKER_CONTENT_TRUST_SERVER="https://[my-dtr-instance].beta-hybrid.play-with-docker.com"
    ```
 
 2. Download and whitelist the DTR CA certificate for TLS connections
 
-Visit `https://[my-dtr-instance].ee-beta2.play-with-docker.com/ca` to download
+Visit `https://[my-dtr-instance].beta-hybrid.play-with-docker.com/ca` to download
 the CA cert (don't forget the `/ca` !!) and place it in Docker's TLS
 configuration directory at:
 
-   `$HOME/.docker/tls/[my-dtr-instance].ee-beta2.play-with-docker.com/ca.crt`
+   `$HOME/.docker/tls/[my-dtr-instance].beta-hybrid.play-with-docker.com/ca.crt`
 
 3. Generate your first key
 
@@ -333,7 +333,7 @@ public key is available in the specified directory (see the command's output).
 4. Create a new signer
 
   ```
-  $ docker trust signer add [signer] [my-dtr-instance].ee-beta2.play-with-docker.com/[user]/myalpine --key /path/to/myfirstkey.pub
+  $ docker trust signer add [signer] [my-dtr-instance].beta-hybrid.play-with-docker.com/[user]/myalpine --key /path/to/myfirstkey.pub
   ```
 
 This command will create a signer with the newly generated key pair. More
@@ -343,12 +343,12 @@ repository.
 5. Sign and push an image
 
   ```
-  $ docker trust sign [my-dtr-instance].ee-beta2.play-with-docker.com/[user]/myalpine:latest
+  $ docker trust sign [my-dtr-instance].beta-hybrid.play-with-docker.com/[user]/myalpine:latest
 
   Signing and pushing trust metadata for [user]/myalpine:latest
   Existing signatures for tag latest digest 8c03bb07a531c53ad7d0f6e7041b64d81f99c6e493cb39abba56d956b40eacbc from: [signer]
   Enter passphrase for myfirstkey key with ID efdadf0: 
-  Successfully signed [my-dtr-instance].ee-beta2.play-with-docker.com/[user]/myalpine:latest
+  Successfully signed [my-dtr-instance].beta-hybrid.play-with-docker.com/[user]/myalpine:latest
   ```
 
 This command will both sign and push the image if possible to the remote
